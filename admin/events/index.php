@@ -13,10 +13,18 @@ $event_id = (string)$_GET['event_id'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-language" content="ru">
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../styles/style.css">
     <script src="../../js/jquery-1.4.3.min.js"></script>
     <script src="../../js/events.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
     <script type="text/javascript" src="../../js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
     <script type="text/javascript" src="../../js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <link rel="stylesheet" type="text/css" href="../../js/fancybox/jquery.fancybox-1.3.4.css" media="screen"/>
@@ -33,6 +41,7 @@ $event_id = (string)$_GET['event_id'];
     </header>
     <!-- Контент -->
     <content>
+
         <?php
         // пользователь уже авторизован
         $state = getState($_SESSION['Username']);
@@ -41,7 +50,16 @@ $event_id = (string)$_GET['event_id'];
             if (!empty($event_id) && geteventInfo($event_id) == false) {
                 echo "<form><p style='font-size:20px;'>Страница недоступна.</p></form>";
             } else if (empty($event_id)) {
-                ?>
+
+
+        $events = getEvents();
+        $geos = array("type" => "FeatureCollection", "features" => array());
+        for ($event = 0; $event < count($events); $event++) {
+            $geo = array('type' => 'Feature', "geometry" => array("type" => "Point", "coordinates" => array($events[$event]['lon'], $events[$event]['lat'])), "properties" => array("name" => $events[$event]['name'], "popupContent" => $events[$event]['date']));
+            array_push($geos["features"], $geo);
+        }
+
+        ?>
                 <!-- Основная форма -->
                 <form id="main_form">
                     <!-- Заголовок -->
@@ -49,6 +67,47 @@ $event_id = (string)$_GET['event_id'];
                         <p style='font-size:20px;'>Мероприятия КультПульт</p>
                     </div>
                     <hr>
+                    <!-- Leaflet beginning -->
+                    <div id="mapid"></div>
+                    <script>
+                        // Map init
+                        var mymap = L.map('mapid').setView([50.6, 36.6], 9);
+                        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGltdXgiLCJhIjoiY2tvem13M2lrMDc2eDJubnZmcGVxNWVicyJ9.P2WIMw5wzvQqEayS72sP-Q', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox/streets-v11',
+                            tileSize: 512,
+                            zoomOffset: -1,
+                            accessToken: 'pk.eyJ1IjoidGltdXgiLCJhIjoiY2tvem13M2lrMDc2eDJubnZmcGVxNWVicyJ9.P2WIMw5wzvQqEayS72sP-Q'
+                        }).addTo(mymap);
+
+                        // Adding individual markers
+                        //var marker1 = L.marker([50.5924481, 36.587910590625]).addTo(mymap);
+                        //var marker2 = L.marker([50.5924481, 36.587910590625]).addTo(mymap);
+                        //var marker3 = L.marker([50.86075335957002, 37.36932992935181]).addTo(mymap);
+                        // ...and popups for them
+                        //marker1.bindPopup("<b>Hello world!</b><br>I am a popup #1.").openPopup();
+                        //marker2.bindPopup("<b>Hello world!</b><br>I am a popup #2.").openPopup();
+                        //marker3.bindPopup("<b>Hello world!</b><br>I am a popup #3.").openPopup();
+
+                        // GeoJSON
+                        function onEachFeature(feature, layer) {
+                            // does this feature have a property named popupContent?
+                            if (feature.properties && feature.properties.popupContent) {
+                                layer.bindPopup(feature.properties.popupContent);
+                            }
+                        }
+
+                        var geojsonFeature = <?= json_encode($geos) ?>;
+
+
+
+                        L.geoJSON(geojsonFeature, {
+                            onEachFeature: onEachFeature
+                        }).addTo(mymap);
+                    </script>
+                    <!-- Leaflet end -->
+</div>
 <!--                    <table class='table_style' id='tab'>-->
 <!--                        <tr class='main_tr_events'>-->
 <!--                            <td><b>№ п/п</b></td>-->

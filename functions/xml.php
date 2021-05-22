@@ -63,9 +63,9 @@ function geteventInfo($id)
 
 function getEvents()
 {
-    // получаем список групп
+    // получаем список мероприятий
     $link = connectDB();
-    $query_events = "SELECT name, date FROM events";
+    $query_events = "SELECT * FROM events";
     $events_sql = mysqli_query($link, $query_events);
     $events_data = [];
     for ($events_data = []; $row = mysqli_fetch_assoc($events_sql); $events_data[] = $row);

@@ -1,3 +1,9 @@
+#mapid {
+    width: 50%;
+    height: 480px;
+    margin: 0 auto;
+}
+
 @font-face {
     font-family: 'Montserrat';
     src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url('Montserrat-SemiBold.ttf') format('truetype');
