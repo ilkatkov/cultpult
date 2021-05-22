@@ -44,13 +44,13 @@ else {
     <form action="add_event.php" method="get">
         <table border="1">
             <tr>
-                <td>ID группы:</td>
+                <td>ID Мероприятия:</td>
                 <td>
                     <input type="number" name="id" id="id">
                 </td>
             </tr>
             <tr>
-                <td>Имя группы:</td>
+                <td>Имя Мероприятия:</td>
                 <td>
                     <input type="text" name="event_name" id="event_name">
                 </td>

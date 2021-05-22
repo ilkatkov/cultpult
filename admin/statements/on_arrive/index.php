@@ -17,7 +17,7 @@ $date_for_calendar = (string)date("Y-m-d");
     <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../../styles/style.css">
     <script src="../../../js/jquery-1.4.3.min.js"></script>
-    <script src="../../../js/on_event.js"></script>
+    <script src="../../../js/on_arrive.js"></script>
     <script type="text/javascript" src="../../../js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
     <script type="text/javascript" src="../../../js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../js/fancybox/jquery.fancybox-1.3.4.css" media="screen"/>
@@ -38,7 +38,7 @@ $date_for_calendar = (string)date("Y-m-d");
         // пользователь уже авторизован
         $state = getState($_SESSION['Username']);
         if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
-        $events = getevents(); // получаем весь список групп
+        $events = getEvents(); // получаем весь список мероприятий
         // в календарь ставим сегодняшнюю дату
         $link = connectDB();
         $date_for_calendar = mysqli_real_escape_string($link, (string)date("Y-m-d"));
@@ -52,7 +52,7 @@ $date_for_calendar = (string)date("Y-m-d");
             <hr>
             <!-- Выбор даты -->
             <div class="statement_div">
-                <p style='font-size:20px;margin-bottom:10px;'>Выберите группу, дату и нажмите<br>"Получить ведомость"
+                <p style='font-size:20px;margin-bottom:10px;'>Выберите мероприятие и нажмите<br>"Получить ведомость"
                 </p>
                 <?php
                 if ($state == "1") {
@@ -60,18 +60,20 @@ $date_for_calendar = (string)date("Y-m-d");
                     echo "<input type = 'text' id='show_event' name='show_event' value = '" . getNameOnCode(geteventOnCurator($_SESSION['Username'])) . "' style='text-align:center;' readonly>";
                 } else {
                     echo "<select id='select_events' name='select_events'>";
+
                     for ($row = 0; $row < count($events); $row++) {
                         $temp_event = $events[$row]['name'];
                         $temp_id = $events[$row]['id'];
-                        echo "<option value = '" . $temp_id . "'> " . $temp_event . " </option>";
+                        echo "<option value = '" . $temp_event . "'> " . $temp_event . " </option>";
                     }
+//                    echo "<input type='hidden' value = '" . $events[0]['date'] . "'>";
                 }
                 ?>
                 </select>
             </div>
                 <div class='statements_div'>
                     <?php
-                    echo "<input type='date' value=" . $date_for_calendar . " name = 'date' id = 'date' autofocus>";
+                    echo "<input type='date' value=" . $events[0]['date'] . " name = 'date' id = 'date' autofocus readonly='readonly'>";
                     ?>
 
                     <script type="text/javascript">

@@ -23,7 +23,7 @@ $events = getevents();
     <script type="text/javascript" src="../../js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
     <script type="text/javascript" src="../../js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <link rel="stylesheet" type="text/css" href="../../js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-    <title>Студенты КультПульт</title>
+    <title>Участники КультПульт</title>
 </head>
 
 <body>
@@ -78,7 +78,7 @@ $events = getevents();
                     <form id="participant_form">
                         <!-- Заголовок -->
                         <div class="div title_div">
-                            <p style='font-size:20px;'>Студенты КультПульт</p>
+                            <p style='font-size:20px;'>Участники КультПульт</p>
                         </div>
                         <hr>
                         <table class = 'table_participants_style' id='tab'>

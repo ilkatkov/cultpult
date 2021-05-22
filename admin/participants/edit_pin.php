@@ -22,7 +22,7 @@ if (!empty($_POST['pin'])) {
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
     <script src="../../js/jquery-3.5.1.min.js"></script>
     <script src="../../js/participants.js"></script>
-    <title>Студенты КультПульт</title>
+    <title>Участники КультПульт</title>
 </head>
 
 <body>
@@ -62,7 +62,7 @@ if (!empty($_POST['pin'])) {
                     } else {
                     ?>
                         <div class="div title_div">
-                            <p style='font-size:20px;'>Студенты КультПульт</p>
+                            <p style='font-size:20px;'>Участники КультПульт</p>
                         </div>
                         <hr>
                         <!-- Пароль -->

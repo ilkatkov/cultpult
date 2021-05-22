@@ -51,10 +51,10 @@ function getUser($login)
     return $users_data;
 }
 
-function getRegisteredOnDate($ticket, $date)
+function getRegisteredOnEvent($ticket, $name)
 {
     $link = connectDB();
-    $query_events = "SELECT id FROM archive WHERE ticket = '" . mysqli_real_escape_string($link, $ticket) . "' AND date = '" . mysqli_real_escape_string($link, $date) . "'";
+    $query_events = "SELECT id FROM archive WHERE ticket = '" . mysqli_real_escape_string($link, $ticket) . "' AND event = '" . mysqli_real_escape_string($link, $name) . "'";
     $participant_sql = mysqli_query(connectDB(), $query_events);
     for ($events_data = []; $row = mysqli_fetch_assoc($participant_sql); $events_data[] = $row);
     return $events_data;
@@ -87,7 +87,7 @@ function getPin($id)
     return $participant_data;
 }
 
-function getevent($id)
+function getEvent($id)
 {
     $link = connectDB();
     $query_pin = "SELECT events FROM participants WHERE id = '" . mysqli_real_escape_string($link, $id) . "'";

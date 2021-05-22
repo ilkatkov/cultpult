@@ -49,7 +49,7 @@ else {
                 </td>
             </tr>
             <tr>
-                <td>ID группы:</td>
+                <td>ID Мероприятия:</td>
                 <td>
                     <input type="number" name="event" id="event">
                 </td>

@@ -7,9 +7,16 @@ window.onload = function() {
     } catch (error) {}
 
     try {
-        var on_event = document.forms.statements_form.on_event;
-        on_event.onclick = function() {
-            location.href = "on_event/";
+        var on_register = document.forms.statements_form.on_register;
+        on_register.onclick = function() {
+            location.href = "on_register/";
+        }
+    } catch (error) {}
+
+    try {
+        var on_arrive = document.forms.statements_form.on_arrive;
+        on_arrive.onclick = function() {
+            location.href = "on_arrive/";
         }
     } catch (error) {}
 

@@ -41,14 +41,9 @@ session_start();
                         <input class="btn btn_menu" type="button" id="on_event" value="Ведомость по группе">
                     <?php } else if ($state != "1") {
                     ?>
-                        <input class="btn btn_menu" type="button" id="total" value="Ведомость за день">
-                        <input class="btn btn_menu" type="button" id="on_month" value="Ведомость за месяц">
-                        <input class="btn btn_menu" type="button" id="on_event" value="Ведомость по группе">
+                        <input class="btn btn_menu" type="button" id="on_register" value="Зарегистрировавшиеся">
+                        <input class="btn btn_menu" type="button" id="on_arrive" value="Пришедшие">
 <!--                    <input class="btn btn_menu" type="button" id="akt_unused" value="Акт выдачи невостр. пит.">-->
-                        <?php
-                        if ($state != "2") { ?>
-                            <input class="btn btn_menu" type="button" id="settings" value="Настройки">
-                        <?php } ?>
                     <?php
                     } else {
                         echo "<form><p style='font-size:20px;'>Страница недоступна.</p></form>";
@@ -59,114 +54,6 @@ session_start();
                 <form action="../">
                     <input class="btn btn_back" type="submit" value="Назад">
                 </form>
-                <div class="diagramma">
-                    <canvas id="myChart" width="300px" height="250px"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var date = new Date();
-
-                        date.setDate(date.getDate() - 4);
-                        var first = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var second = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var third = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var four = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var fifth = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var sixth = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var seventh = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var eighth = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var ninth = date.getDate();
-                        date.setDate(date.getDate() + 1);
-                        var tenth = date.getDate();
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: [
-                                    first,
-                                    second,
-                                    third,
-                                    four,
-                                    fifth,
-                                    sixth,
-                                    seventh,
-                                    eighth,
-                                    ninth,
-                                    tenth
-                                ],
-                                datasets: [{
-                                    label: ' питающихся студентов',
-                                    data: [
-                                        <?php if ($state != "1") {
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("-4 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("-3 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("-2 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("-1 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d")) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("+1 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("+2 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("+3 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("+4 day"))) . ",";
-                                            echo getAllLunchOnday((string)date("Y-m-d", strtotime("+5 day")));
-                                        } else {
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("-4 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("-3 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("-2 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("-1 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d"), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("+1 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("+2 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("+3 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("+4 day")), geteventOnCurator($_SESSION['Username'])) . ",";
-                                            echo getAllLunchOnDayAndevent((string)date("Y-m-d", strtotime("+5 day")), geteventOnCurator($_SESSION['Username']));
-                                        } ?>
-                                    ],
-                                    backgroundColor: [
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)'
-
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
-                </div>
             <?php
             } else {
             ?>

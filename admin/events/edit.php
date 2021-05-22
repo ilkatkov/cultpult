@@ -13,7 +13,7 @@ $old_time = $_POST['old_time'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../styles/style.css">
-    <title>Группы КультПульт</title>
+    <title>Мероприятия КультПульт</title>
 </head>
 
 <body>

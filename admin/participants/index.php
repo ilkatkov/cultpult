@@ -15,7 +15,7 @@ session_start();
     <link rel="stylesheet" href="../../styles/style.css">
     <script src="../../js/jquery-3.5.1.min.js"></script>
     <script src="../../js/events.js"></script>
-    <title>Студенты КультПульт</title>
+    <title>Участники КультПульт</title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@ session_start();
                 <form id="main_form" action="participants.php" method = "GET">
                     <!-- Заголовок -->
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Студенты КультПульт</p>
+                        <p style='font-size:20px;'>Участники КультПульт</p>
                     </div>
                     <hr>
                     <div>

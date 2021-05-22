@@ -1,20 +1,15 @@
 <?php
-require '../../../vendor/autoload.php';
-include_once "../../../functions/xml.php";
-include_once "../../../functions/mysql.php";
+require '../../vendor/autoload.php';
+include_once "../../functions/xml.php";
+include_once "../../functions/mysql.php";
 
 session_start();
 
 $state = getState($_SESSION['Username']);
-if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
-    
+if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']) && $state == "5") {
     $link = connectDB();
-
-    $event_code = (string)$_POST['select_events'];
-    $event_name = getNameOnCode($event_code);
-    $date_sql = $_POST['date'];
-    $time = getTimeOnCode($event_code)[0]["time"];
-    $date = date("d.m.Y", strtotime($date_sql)); // дата в документе
+    $event_code = $_GET['event'];
+    $event_name = geteventInfo($event_code)['name'];
     $curator = getCuratorOnCode((string)$event_code);
     $name_arr = explode(" ", $curator);
     $fio = $name_arr[0] . " " . substr($name_arr[1], 0, 2) . "." . substr($name_arr[2], 0, 2) . ".";
@@ -51,13 +46,13 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
 
     // шапка
     $section->addText(htmlspecialchars($company_name), array(), array('align' => 'center'));
-    $statement = "Ведомость питания группы " . $event_name . " от " . $date;
+    $statement = "PIN-коды КультПульт Мероприятия " . $event_name;
     $section->addText(htmlspecialchars($statement), array(), array('align' => 'center'));
     $text = "";
     $section->addText(htmlspecialchars($text), array(), array('align' => 'center', 'space' => array('before' => 0, 'after' => 0)));
 
     // таблица
-    $TableStyleName = 'Ведомость';
+    $TableStyleName = 'PIN-коды';
     $TableStyle = array('borderSize' => 0, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER);
     $TableCellStyle = array('valign' => 'center');
     $TableCellBtlrStyle = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
@@ -66,41 +61,40 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
     $table = $section->addTable($TableStyleName);
     $table->addRow();
     $n_width = \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2);
-    $participant_width = \PhpOffice\PhpWord\Shared\Converter::cmToTwip(8);
-
+    $participant_width = \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6);
+    $login_width = \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4);
+    $pin_width = \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4);
     $table->addCell($n_width, $TableCellStyle)->addText('№ п/п', array(), array('align' => 'center'), $TableFontStyle);
     $table->addCell($event_width, $TableCellStyle)->addText('ФИО Студента', array(), array('align' => 'center'), $TableFontStyle);
-    $number = 1;
+    $table->addCell($login_width, $TableCellStyle)->addText('Билет', array(), array('align' => 'center'), $TableFontStyle);
+    $table->addCell($pin_width, $TableCellStyle)->addText('PIN-код', array(), array('align' => 'center'), $TableFontStyle);
     $participants = getparticipants($event_code);
     for ($row = 0; $row <= count($participants) - 1; $row++) {
         $temp_participant = $participants[$row]['surname'] . " " . substr($participants[$row]['name'], 0, 2) . "." . substr($participants[$row]['patronymic'], 0, 2) . ".";
         $temp_code = $participants[$row]['id'];
-        $temp_event = (string)getparticipantInfo($temp_code)[0]['events'];
-        // var_dump($temp_code);
-        $result = getRegisteredOnDate((string)$temp_code, (string)$date_sql);
-        // var_dump($result);
-        if ((count($result) == 1) && ($event_code == $temp_event) && ($time != "00:00")) {
-            $table->addRow();
-            $table->addCell($n_width)->addText($number, array(), array('align' => 'center'));
-            $table->addCell($participant_width)->addText(mb_convert_encoding($temp_participant, "UTF-8"), array(), array('align' => 'center'));
-            $number++;
-        }
+        $temp_pin = (string)rand(0, 9) . (string)rand(0, 9) . (string)rand(0, 9) . (string)rand(0, 9);
+        editPin($temp_code, $temp_pin);
+        $table->addRow();
+        $table->addCell($n_width)->addText((string)$row + 1, array(), array('align' => 'center'));
+        $table->addCell($participant_width)->addText(mb_convert_encoding($temp_participant, "UTF-8"), array(), array('align' => 'center'));
+        $table->addCell($login_width)->addText(mb_convert_encoding($temp_code, "UTF-8"), array(), array('align' => 'center'));
+        $table->addCell($pin_width)->addText(mb_convert_encoding($temp_pin, "UTF-8"), array(), array('align' => 'center'));
     }
 
     // сохранение и скачивание файла
     $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-    $file_name = $event_code . '_' . $date . '.docx';
-    $objWriter->save('../../../storage/event/' . $file_name);
-    header("Content-Length: " . filesize('../../../storage/event/' . $file_name));
+    $file_name = $event_code . '.docx';
+    $objWriter->save('../../storage/pin/' . $file_name);
+    header("Content-Length: " . filesize('../../storage/pin/' . $file_name));
     header("Content-Disposition: attachment; filename=" . $file_name);
-    header("Content-Type: application/x-force-download; name=\"" . '../../../storage/event/' . $file_name . "\"");
-    readfile('../../../storage/event/' . $file_name);
+    header("Content-Type: application/x-force-download; name=\"" . '../../storage/pin/' . $file_name . "\"");
+    readfile('../../storage/pin/' . $file_name);
 } else {
-    ?>
-        <form>
-            <p class="login_mes">Возврат на главную...</p>
-            <meta http-equiv='refresh' content='1;../../index.php'>
-        </form>
-    <?php
-    }
-    ?>
+?>
+    <form>
+        <p class="login_mes">Возврат на главную...</p>
+        <meta http-equiv='refresh' content='1;../index.php'>
+    </form>
+<?php
+}
+?>

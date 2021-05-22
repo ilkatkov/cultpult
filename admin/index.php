@@ -44,7 +44,7 @@ $current_date = $dates[1];
                 } else {
                     $state = getUser($_SESSION['Username'])[0]['state'];
                     if ($state == "5") {
-                        $user_is = "Суперадмин";
+                        $user_is = "Организатор";
                     } else if ($state == "4") {
                         $user_is = "Админ";
                     } else if ($state == "3") {
@@ -65,38 +65,14 @@ $current_date = $dates[1];
                         </div>
                         <hr>
                         <?php
-                        // уровни - 5 (суперадмин - все), 4 (админ - возможность менять пин-коды), 3 (столовая - общие ведомости), 2 (расписание - группы), 1 (куратор - ведомости по группе)
+                        // уровни - 5 (суперадмин - все), 4 (админ - возможность менять пин-коды), 3 (столовая - общие ведомости), 2 (расписание - Мероприятия), 1 (куратор - ведомости по группе)
                         if ($state == "5") {
                         ?>
                             <input class="btn btn_menu" type="button" id="statements" value="Ведомости">
                             <input class="btn btn_menu" type="button" id="orders" value="Записи">
-                            <input class="btn btn_menu" type="button" id="events" value="Группы">
-                            <input class="btn btn_menu" type="button" id="participants" value="Студенты">
+                            <input class="btn btn_menu" type="button" id="events" value="Мероприятия">
+                            <input class="btn btn_menu" type="button" id="participants" value="Участники">
                             <input class="btn btn_menu" type="button" id="users" value="Администрирование">
-                            <input class="btn btn_menu" type="button" id="change_password" value="Сменить пароль">
-                        <?php
-                        }
-                        ?>
-                        <?php if ($state == "4") {
-                        ?>
-                            <input class="btn btn_menu" type="button" id="statements" value="Ведомости">
-                            <input class="btn btn_menu" type="button" id="orders" value="Записи">
-                            <input class="btn btn_menu" type="button" id="events" value="Группы">
-                            <input class="btn btn_menu" type="button" id="participants" value="Студенты">
-                            <input class="btn btn_menu" type="button" id="change_password" value="Сменить пароль">
-                        <?php
-                        }
-                        ?>
-                        <?php if ($state == "3") {
-                        ?>
-                            <input class="btn btn_menu" type="button" id="statements" value="Ведомости">
-                            <input class="btn btn_menu" type="button" id="change_password" value="Сменить пароль">
-                        <?php
-                        }
-                        ?>
-                        <?php if ($state == "2") {
-                        ?>
-                            <input class="btn btn_menu" type="button" id="events" value="Группы">
                             <input class="btn btn_menu" type="button" id="change_password" value="Сменить пароль">
                         <?php
                         }

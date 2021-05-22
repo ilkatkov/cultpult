@@ -15,16 +15,34 @@ function getParticipantInfo($pin)
 
 
 
-function getparticipants($id)
+function getRegisterParticipants($name)
 {
-    // получаем список студентов группы
+    // получаем список записавшихся участников мероприятия Мероприятия
     $link = connectDB();
-    $query_participants = "SELECT * FROM participants WHERE events='" . $id . "'";
+    $query_participants = "SELECT * FROM participants WHERE event='" . $name . "'";
     $participants_sql = mysqli_query($link, $query_participants);
     for ($participants_data = []; $row = mysqli_fetch_assoc($participants_sql); $participants_data[] = $row);
     return $participants_data;
 }
 
+function getArriveParticipants($name)
+{
+    // получаем список записавшихся участников мероприятия Мероприятия
+    $link = connectDB();
+    $query_participants = "SELECT * FROM archive WHERE event='" . $name . "'";
+    $participants_sql = mysqli_query($link, $query_participants);
+    for ($participants_data = []; $row = mysqli_fetch_assoc($participants_sql); $participants_data[] = $row);
+    return $participants_data;
+}
+
+function getParticipantFullName($id)
+{
+    $link = connectDB();
+    $query_participants = "SELECT `name`, `surname`, `patronymic` FROM participants WHERE `id` ='" . $id . "'";
+    $participants_sql = mysqli_query($link, $query_participants);
+    for ($participants_data = []; $row = mysqli_fetch_assoc($participants_sql); $participants_data[] = $row);
+    return $participants_data;
+}
 
 function geteventInfo($id)
 {
@@ -47,7 +65,7 @@ function getEvents()
 {
     // получаем список групп
     $link = connectDB();
-    $query_events = "SELECT name FROM events";
+    $query_events = "SELECT name, date FROM events";
     $events_sql = mysqli_query($link, $query_events);
     $events_data = [];
     for ($events_data = []; $row = mysqli_fetch_assoc($events_sql); $events_data[] = $row);
@@ -91,11 +109,11 @@ function getForm($event_id)
     return $participants_data[0]['form'];
 }
 
-function getCuratorOnCode($code)
+function getCuratorOnName($name)
 {
-    $events = getevents();
+    $events = getEvents();
     foreach ($events as $event) {
-        if ($event["id"] == $code) {
+        if ($event["name"] == $name) {
             return $event["curator"];
         }
     }

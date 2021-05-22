@@ -20,7 +20,7 @@ $event_id = (string)$_GET['event_id'];
     <script type="text/javascript" src="../../js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
     <script type="text/javascript" src="../../js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <link rel="stylesheet" type="text/css" href="../../js/fancybox/jquery.fancybox-1.3.4.css" media="screen"/>
-    <title>Группы КультПульт</title>
+    <title>Мероприятия КультПульт</title>
 </head>
 
 <body>
@@ -38,7 +38,6 @@ $event_id = (string)$_GET['event_id'];
         $state = getState($_SESSION['Username']);
         if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']) && $state != "3" && $state != "1") {
             $events = getevents(); // получаем весь список групп
-            $times = geteventsTime();
             if (!empty($event_id) && geteventInfo($event_id) == false) {
                 echo "<form><p style='font-size:20px;'>Страница недоступна.</p></form>";
             } else if (empty($event_id)) {
@@ -47,95 +46,31 @@ $event_id = (string)$_GET['event_id'];
                 <form id="main_form">
                     <!-- Заголовок -->
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Группы КультПульт</p>
+                        <p style='font-size:20px;'>Мероприятия КультПульт</p>
                     </div>
                     <hr>
-                    <table class='table_style' id='tab'>
-                        <tr class='main_tr_events'>
-                            <td><b>№ п/п</b></td>
-                            <td><b>Время</b></td>
-                            <td><b>Группа</b></td>
-                            <td><b>ФИО куратора</b></td>
-                            <!--                                <td><b>ФИО преподавателя</b></td>-->
-                            <td><img class="edit_img" src='../../img/participants.svg'></td>
-                            <td><b>Опции</b></td>
-                            <?php
-                            for ($row = 0; $row < count($events); $row++) {
-                                $temp_event = $events[array_search($times[$row]['id'], array_column($events, 'id'))]['name'];
-                                $temp_curator = $events[array_search($times[$row]['id'], array_column($events, 'id'))]['curator'];
-                                $temp_code = $events[array_search($times[$row]['id'], array_column($events, 'id'))]['id'];
-                                $temp_count = count(getparticipants($temp_code));
-                                $temp_teacher = getTeacher($temp_code);
-                                echo "<tr class = 'events'>";
-                                echo "<td>" . (string)($row + 1) . "</td>";
-                                echo "<td>" . $times[$row]['time'] . "</td>";
-                                echo "<td>" . $temp_event . "</td>";
-                                echo "<td>" . $temp_curator . "</td>";
-//                                    echo "<td>" . $temp_teacher . "</td>";
-                                echo "<td>" . $temp_count . "</td>";
-                                echo "<td><img class = 'edit_img' src='../../img/edit.svg' width=15% onclick=" . "editevent('" . $temp_code . "')></td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                    </table>
-
-                    <?php if ($state != "3" && $state != "1") {
-                        ?>
-                        <!-- Кнопки -->
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $("#btn_clear_time").fancybox({
-                                    'titlePosition': 'inside',
-                                    'transitionIn': 'none',
-                                    'transitionOut': 'none'
-                                });
-                            });
-                        </script>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $("#btn_db_update").fancybox({
-                                    'titlePosition': 'inside',
-                                    'transitionIn': 'none',
-                                    'transitionOut': 'none'
-                                });
-                            });
-                        </script>
-
-                        <input class="btn btn_menu" type="button" href="#clear" id="btn_clear_time"
-                               value="Сбросить время питания">
-                        <div style="display: none;">
-                            <div id="clear" style="width:400px;height:220px;overflow:auto;">
-                                <p id="clear_data">
-                                <p>Сброс времени<br>Введите пароль:</p>
-                                <input type="password" id="clear_password">
-                                <hr>
-                                <input class="btn btn_ok" type="button" id="clear_password_ok" value="Подтвердить">
-                                </p>
-                            </div>
-                        </div>
-
-                        <?php
-                    } ?>
-                    <?php
-                    if ($state != "2" && $state != "4") {
-                        ?>
-                        <input class="btn btn_menu" type="button" href="#update" id="btn_db_update"
-                               value="Обновить базу данных">
-                        <div style="display: none;">
-                            <div id="update" style="width:400px;height:220px;overflow:auto;">
-                                <p id="update_data">
-                                <p>Обновить БД<br>Введите пароль:</p>
-                                <input type="password" id="update_password">
-                                <hr>
-                                <input class="btn btn_ok" type="button" id="update_password_ok" value="Подтвердить">
-                                </p>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                    ?>
+<!--                    <table class='table_style' id='tab'>-->
+<!--                        <tr class='main_tr_events'>-->
+<!--                            <td><b>№ п/п</b></td>-->
+<!--                            <td><b>Мероприятие</b></td>-->
+<!--                            <td><img class="edit_img" src='../../img/students.svg'></td>-->
+<!--                            <td><b>Опции</b></td>-->
+<!--                            --><?php
+//                            for ($row = 0; $row < count($events); $row++) {
+//                                $temp_event = $events[$row]['name'];
+//                                $temp_curator = $events[$row]['curator'];
+//                                $temp_code = $events[$row]['name'];
+//                                $temp_count = count(getRegisterParticipants($temp_code));
+//                                echo "<tr class = 'events'>";
+//                                echo "<td>" . (string)($row + 1) . "</td>";
+//                                echo "<td>" . $temp_event . "</td>";
+//                                echo "<td>" . $temp_count . "</td>";
+//                                echo "<td><img class = 'edit_img' src='../../img/edit.svg' width=15% onclick=" . "editevent('" . $temp_code . "')></td>";
+//                                echo "</tr>";
+//                            }
+//                            ?>
+<!--                    </table>-->
                     <input class="btn btn_back" type="button" id="btn_back_tab" value="Назад">
-
                 </form>
                 <?php
             } else { // редактируем выбранную группу
@@ -152,7 +87,7 @@ $event_id = (string)$_GET['event_id'];
                 <form action="edit.php" method="post" id="event_form">
                     <!-- Заголовок -->
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Группы КультПульт</p>
+                        <p style='font-size:20px;'>Мероприятия КультПульт</p>
                     </div>
                     <hr>
                     <table class='table_participants_style' id='tab'>
