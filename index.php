@@ -12,13 +12,7 @@ session_destroy();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="icon.svg" type=" image/svg+xml">
     <title>КультПульт</title>
     <meta name="description" content='Запись на мероприятия КультПульт'>
     <link rel="stylesheet" href="styles/new_design.css?v3.0">
@@ -32,17 +26,13 @@ session_destroy();
 <body>
     <div class="header_div">
         <div class="logo_div">
-            <img src="img/logo.svg" class="logo_img">
-            <p class="logo_word">КультПульт</p>
-        </div>
-        <div class="date_lunch">
-            Запись на мероприятия
+            <img src="img/logo_mini.svg" class="logo_img">
         </div>
     </div>
     <div class="main_div">
-        <div class="auth">Авторизация на сервисе</div>
+        <div class="auth"><b>Авторизация</b></div>
         <form action="register.php" method="POST" name="id_form">
-            <p class="participant_label">Код участника</p>
+            <p class="participant_label">Введите код участника (8 символов)</p>
             <?php
             if (!isMobile()) {
             ?>
@@ -79,52 +69,17 @@ session_destroy();
                 </div>
             </div>
             <div class="input_div">
-                <input type="submit" id="accept" value="Я участвую">
+                <input class = "go_main" type="submit" id="accept" value="Я участвую">
                 <img src="img/bxs-chevron-right.svg " class="chevron_go">
             </div>
-        </form>
-        <div class="adv">
-            <div class="slider">
-                <div class="adv_control">
-                    <div class="adv_label">Акции от партнёров</div>
-                    <a class="slider__control slider__control_prev" href="#" role="button"></a>
-                    <a class="slider__control slider__control_next" href="#" role="button"></a>
-                </div>
-                <div class="slider__wrapper">
-                    <div class="slider__items">
-                        <?php
-                        $slider = getAdv();
-                        for ($img = 0; $img < count($slider); $img++) {
-                            if (!empty($slider[$img])) {
-                                echo "<div class='slider__item'>";
-                                echo "<img src='" . $slider[$img] . "' class='adv_img'>";
-                                echo "</div>";
-                            }
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <script src="js/slider.js "></script>
-        </div>
-        <button data-fancybox data-src="#modal_info" href="javascript:;" class="info_button"><img src="img/info.svg" class="info_img"></button>
-    </div>
 
-    <div class="modal_info" id="modal_info">
-        <div class="info_label">Информация</div>
-        <?php
-        $info = getInfo(); // получение информации
-        ?>
-        <div class="info_body">
-            <p><?= $info['text'] ?></p>
-            <div class="contact">
-                <img src="img/vk.svg">&nbsp;<?= $info['vk'] ?>
-            </div>
-            <div class="contact">
-                <img src="img/email.svg">&nbsp;<?= $info['email'] ?>
-            </div>
-        </div>
+
+        </form>
+
     </div>
+    <form action = "schedule.php">
+        <input class = "schedule_button" type="submit" id="accept" value="Посмотреть расписание">
+    </form>
 
 </body>
 

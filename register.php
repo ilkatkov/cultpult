@@ -25,13 +25,7 @@ if (!empty($existParticipant))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="icon.svg" type=" image/svg+xml">
     <title>КультПульт</title>
     <meta name="description" content='Запись на мероприятия'>
     <link rel="stylesheet" href="styles/new_design.css?v2.0">
@@ -66,8 +60,7 @@ if (!empty($existParticipant))
 <body>
     <div class="header_div">
         <div class="logo_div">
-            <img src="img/logo.svg" class="logo_img">
-            <p class="logo_word">КультПульт</p>
+            <img src="img/logo_mini.svg" class="logo_img">
         </div>
         <div class="date_lunch">
             Запись на мероприятия
@@ -97,13 +90,14 @@ if (!empty($existParticipant))
             echo $full_name . ",";
         ?>
     </div>
-    <div class="message">Вы успешно записались на мероприятие<font color="#F1813B">
-        <?= $event?></font>.<br>Приятного отдыха!</div>
+    <div class="message">Вы подтвердили участие на мероприятии<br>
+        <?= $event?>.<br>Приятного отдыха!</div>
     <meta http-equiv='refresh' content='3;index.php'>
-    </div>
     <div class="input_div ">
-        <button class="cancel_button " id="cancel_button" name="cancel_button">Отменить заявку</button>
+        <button class="go_main " id="cancel_button" name="cancel_button">Отменить заявку</button>
     </div>
+    </div>
+
 
 <?php
         }

@@ -22,7 +22,7 @@ function connectDB()
     // настройки БД
     $host = 'localhost';
     $user = 'root';
-    $password = 'root';
+    $password = 'AHBkfyx17';
     $db_name = 'cultpult';
 
     // подключение к БД и установка кодировки UTF-8

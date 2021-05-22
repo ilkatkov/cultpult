@@ -40,18 +40,19 @@ body {
     display: flex;
     flex-direction: column;
     height: 128px;
+    max-width: 100%;
 }
 
 .logo_div {
     display: flex;
     justify-content: center;
     height: 66px;
-    margin: 0 auto;
+
     margin-bottom: 32px;
 }
 
 .logo_img {
-    height: 66px;
+    height: 100px;
 }
 
 .logo_word {
@@ -99,14 +100,14 @@ body {
     flex-direction: column;
     /* justify-content: center; */
     width: 420px;
-    height: 797px;
+    height: 650px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.06);
     border-radius: 16px;
 }
 
 .participant_label {
-    /* Студенческий билет */
+    /* Код */
     margin-left: 32px;
     margin-top: 19px;
     display: flex;
@@ -116,7 +117,7 @@ body {
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
-    color: #F1813B;
+    color: black;
 }
 
 .input_div {
@@ -226,102 +227,122 @@ input[type=submit] {
     justify-content: center;
     vertical-align: middle;
     align-items: center;
-    /* app-orange */
-    background: #F1813B;
+    background: white;
+    border: 2px solid #7D3AFF;
+    box-sizing: border-box;
     border-radius: 10px;
     outline: 0;
     outline-offset: 0;
-    border: none;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: black;
 }
 
-.kb_button:hover {
-    background: #FF9D5F;
-}
-
-.kb_button:active {
-    background: #F96F19;
-}
 
 .kb_button+.kb_button {
     margin-left: 15.5px;
     margin-bottom: 10px;
 }
 
-input[type=submit] {
+/*input[type=submit] {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    text-align: left;*/
+/*    padding: 14px 24px;*/
+/*    max-width: 362px;*/
+/*    width: 100%;*/
+/*    height: 52px;*/
+/*    margin-top: 6px;*/
+/*    margin-left: 30px;*/
+/*    !* app-green *!*/
+/*    background: #2ECC71;*/
+/*    border-radius: 10px;*/
+/*    border: none;*/
+/*    outline: 0;*/
+/*    outline-offset: 0;*/
+/*    z-index: 5;*/
+/*    font-family: 'Montserrat';*/
+/*    font-style: normal;*/
+/*    font-weight: bold;*/
+/*    font-size: 16px;*/
+/*    line-height: 24px;*/
+/*    color: #FFFFFF;*/
+/*}*/
+
+.go_main {
     display: flex;
     align-items: center;
-    text-align: left;
-    padding: 14px 24px;
+    text-align: center;
+    justify-content: center;
     max-width: 362px;
     width: 100%;
     height: 52px;
     margin-top: 6px;
     margin-left: 30px;
-    /* app-green */
-    background: #2ECC71;
+    border: 3px solid #FA00E7;
+    box-sizing: border-box;
     border-radius: 10px;
-    border: none;
     outline: 0;
     outline-offset: 0;
     z-index: 5;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 24px;
     line-height: 24px;
-    color: #FFFFFF;
+    color: black;
+    background: white;
 }
 
-input[type=submit]:hover {
-    background: #45DB84;
-}
+/*input[type=submit]:hover {*/
+/*    background: #45DB84;*/
+/*}*/
 
-input[type=submit]:active {
-    background: #10D162;
-}
+/*input[type=submit]:active {*/
+/*    background: #10D162;*/
+/*}*/
 
-.iwe[disabled] {
-    background: #2ECC71;
-    opacity: 0.25;
-}
+/*.iwe[disabled] {*/
+/*    background: #2ECC71;*/
+/*    opacity: 0.25;*/
+/*}*/
 
 .schedule_button {
     display: flex;
     align-items: center;
-    padding: 14px 24px;
+    text-align: center;
+    justify-content: center;
     max-width: 362px;
     width: 100%;
-    height: 52px;
-    margin-top: 16px;
-    margin-left: 30px;
-    /* app-blue */
-    background: #45B5F5;
+    max-width: 500px;
+    height: 75px;
+    margin-bottom: 76px;
+    /*margin-left: 30px;*/
+    border: 3px solid #FFE22C;
+    box-sizing: border-box;
     border-radius: 10px;
-    border: none;
     outline: 0;
     outline-offset: 0;
     z-index: 5;
-    font-family: 'Montserrat';
+    font-family: 'Manrope';
+    font-weight: 500;
     font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    color: #FFFFFF;
+    font-size: 30px;
+    line-height: 41px;
+    color: black;
+    background: white;
 }
 
-.schedule_button:hover {
-    background: #5CC2FC;
-}
+/*.schedule_button:hover {*/
+/*    background: #5CC2FC;*/
+/*}*/
 
-.schedule_button:active {
-    background: #2AB0FD;
-}
+/*.schedule_button:active {*/
+/*    background: #2AB0FD;*/
+/*}*/
 
 .cancel_button {
     display: flex;
@@ -572,13 +593,13 @@ input[type=submit]:active {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    justify-content: center;
+    padding-top: 20px;
+    /*justify-content: center;*/
     margin: 0 auto;
     margin-top: 31px;
-    padding-bottom: 20px;
     max-width: 420px;
     width: 100%;
-    height: 120px;
+    height: 230px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.06);
     border-radius: 16px;
@@ -613,6 +634,7 @@ input[type=submit]:active {
 .message {
     margin: 0 auto;
     margin-top: 18px;
+    margin-bottom: 40px;
     max-width: 400px;
     height: 48px;
     font-family: 'Montserrat';
