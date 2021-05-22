@@ -72,6 +72,18 @@ function getEvents()
     return $events_data;
 }
 
+function getEventsByDates($start, $end)
+{
+    // получаем список мероприятий
+    $link = connectDB();
+    $query_events = "SELECT * FROM events WHERE date BETWEEN '" . $start . "' AND '" . $end . "'";
+    $events_sql = mysqli_query($link, $query_events);
+    $events_data = [];
+    for ($events_data = []; $row = mysqli_fetch_assoc($events_sql); $events_data[] = $row);
+    return $events_data;
+}
+
+
 //simple for getevents ↓
 // $events = getevents();
 // for ($i = 0; $i < count($events); $i++){

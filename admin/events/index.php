@@ -6,6 +6,9 @@ session_start();
 
 $event_id = (string)$_GET['event_id'];
 
+$today = $_GET['start'];
+$date = $_GET['end'];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -52,10 +55,10 @@ $event_id = (string)$_GET['event_id'];
             } else if (empty($event_id)) {
 
 
-        $events = getEvents();
+        $events = getEventsByDates($today, $date);
         $geos = array("type" => "FeatureCollection", "features" => array());
         for ($event = 0; $event < count($events); $event++) {
-            $geo = array('type' => 'Feature', "geometry" => array("type" => "Point", "coordinates" => array($events[$event]['lon'], $events[$event]['lat'])), "properties" => array("name" => $events[$event]['name'], "popupContent" => $events[$event]['date']));
+            $geo = array('type' => 'Feature', "geometry" => array("type" => "Point", "coordinates" => array($events[$event]['lon'], $events[$event]['lat'])), "properties" => array("name" => $events[$event]['name'], "popupContent" => "<a href='index.php?event_id=" . $events[$event]['id'] . "'>" . $events[$event]['name'] . "</a>" . "<br>" . (string)DateTime::createFromFormat('Y-m-d', $events[$event]['date'])->format('d.m.Y')));
             array_push($geos["features"], $geo);
         }
 
@@ -67,6 +70,25 @@ $event_id = (string)$_GET['event_id'];
                         <p style='font-size:20px;'>Мероприятия КультПульт</p>
                     </div>
                     <hr>
+                    <?php
+                    if (empty($today)){
+                        $dt1 = new DateTime();
+                        $today = $dt1->format("Y-m-d");
+                    }
+
+                    if (empty($date)){
+                        $dt2 = new DateTime("+1 month");
+                        $date = $dt2->format("Y-m-d");
+                    }
+
+                    ?>
+                    <p>Даты проведения мероприятий</p>
+                    <form action="index.php" method="GET">
+                        <input type="date" name = "start" value="<?= $today ?>">
+                        <input type="date" name = "end" value="<?= $date ?>">
+                        <input type = "submit" value = "ok">
+                    </form>
+
                     <!-- Leaflet beginning -->
                     <div id="mapid"></div>
                     <script>
@@ -75,7 +97,7 @@ $event_id = (string)$_GET['event_id'];
                         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGltdXgiLCJhIjoiY2tvem13M2lrMDc2eDJubnZmcGVxNWVicyJ9.P2WIMw5wzvQqEayS72sP-Q', {
                             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                             maxZoom: 18,
-                            id: 'mapbox/streets-v11',
+                            id: 'timux/ckp02bah8422n17o1r9gj5pvc',
                             tileSize: 512,
                             zoomOffset: -1,
                             accessToken: 'pk.eyJ1IjoidGltdXgiLCJhIjoiY2tvem13M2lrMDc2eDJubnZmcGVxNWVicyJ9.P2WIMw5wzvQqEayS72sP-Q'
