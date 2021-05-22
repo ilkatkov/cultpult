@@ -1,0 +1,3 @@
+AddDefaultCharset UTF-8
+AddType application/x-httpd-php .js
+Options All -Indexes

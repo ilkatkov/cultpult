@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Dissalow: /pin.php
+Dissalow: /result.php
+Dissalow: /admin/
+Dissalow: /storage/
+Dissalow: /db/
+Sitemap: https://xn--8-stbfm.xn--80apjjlx0a.xn--p1ai/sitemap.xml
+Host: https://xn--8-stbfm.xn--80apjjlx0a.xn--p1ai
