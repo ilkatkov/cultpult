@@ -16,52 +16,52 @@ window.onload = function() {
         var accept = document.getElementById("accept");
 
         k1.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "1";
             }
         }
         k2.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "2";
             }
         }
         k3.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "3";
             }
         }
         k4.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "4";
             }
         }
         k5.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "5";
             }
         }
         k6.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "6";
             }
         }
         k7.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "7";
             }
         }
         k8.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "8";
             }
         }
         k9.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "9";
             }
         }
         k0.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 login.value = login.value + "0";
             }
         }
@@ -72,12 +72,11 @@ window.onload = function() {
         }
 
         accept.onclick = function() {
-            if (login.value.length != 6) {
+            if (login.value.length != 8) {
                 return false;
             } else {
-                accept.value = "Проверяю студента";
+                accept.value = "Проверяю..";
                 block = true;
-                accept.style.background = "#2ECC71";
                 accept.style.opacity = 0.5;
             }
         }

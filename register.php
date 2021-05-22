@@ -94,7 +94,7 @@ if (!empty($existParticipant))
         <?= $event?>.<br>Приятного отдыха!</div>
     <meta http-equiv='refresh' content='3;index.php'>
     <div class="input_div ">
-        <button class="go_main " id="cancel_button" name="cancel_button">Отменить заявку</button>
+        <button class="go_main2" id="cancel_button" name="cancel_button">Отменить заявку</button>
     </div>
     </div>
 

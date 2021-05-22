@@ -38,7 +38,7 @@ session_destroy();
             ?>
                 <script src="js/keyboard_login.js"></script>
                 <div class="input_div">
-                    <input type="text" class="participant_input" name="participant_id" id="participant_id" inputmode="numeric" autocomplete="off" maxlength=8 pattern="[0-9]{7}" title="Введите 8-код подтверждения." readonly>
+                    <input type="text" class="participant_input" name="participant_id" id="participant_id" inputmode="numeric" autocomplete="off" maxlength=8 pattern="[0-9]{8}" title="Введите 8-код подтверждения." readonly>
                     <img src="img/backspace-fill.svg" class="backspace" id="backspace">
                 </div>
             <?php
@@ -46,7 +46,7 @@ session_destroy();
             ?>
                 <script src="js/keyboard_login_mobile.js"></script>
                 <div class="input_div">
-                    <input type="text" class="participant_input" name="participant_id" id="participant_id_mobile" inputmode="numeric" autocomplete="off" maxlength=8 pattern="[0-9]{7}" title="Введите 8-код подтверждения.">
+                    <input type="text" class="participant_input" name="participant_id" id="participant_id_mobile" inputmode="numeric" autocomplete="off" maxlength=8 pattern="[0-9]{8}" title="Введите 8-код подтверждения.">
                     <img src="img/backspace-fill.svg" class="backspace" id="backspace">
                 </div>
             <?php
@@ -69,7 +69,7 @@ session_destroy();
                 </div>
             </div>
             <div class="input_div">
-                <input class = "go_main" type="submit" id="accept" value="Я участвую">
+                <input class = "go_main1" type="submit" id="accept" value="Я участвую">
                 <img src="img/bxs-chevron-right.svg " class="chevron_go">
             </div>
 

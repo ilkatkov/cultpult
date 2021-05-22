@@ -75,7 +75,7 @@ window.onload = function() {
             if (login.value.length != 8) {
                 return false;
             } else {
-                accept.value = "Проверяю студента";
+                accept.value = "Проверяю участника";
                 block = true;
                 accept.style.background = "#2ECC71";
                 accept.style.opacity = 0.5;
