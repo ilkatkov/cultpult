@@ -176,22 +176,22 @@ if (empty($date)){
                     <table class='table_participants_style' id='tab'>
                         <tr>
                             <td class='main_td_participants'>ID:</td>
-                            <td><input type='text' class='input input_event' name='event_id' id="event_id"
+                            <td><input type='text' class='input input_event admin_input' name='event_id' id="event_id"
                                        value='<?= $event_id ?>' readonly></td>
                         </tr>
                         <tr>
                             <td class='main_td_participants'>Мероприятие:</td>
-                            <td><input type='text' class='input input_event' name='event_name'
+                            <td><input type='text' class='input input_event admin_input' name='event_name'
                                        value='<?= $choosen_event["name"] ?>' readonly></td>
                         </tr>
                         <tr>
                             <td class='main_td_participants'>Участников:</td>
-                            <td><input type='text' class='input input_event' name='event_count'
+                            <td><input type='text' class='input input_event admin_input' name='event_count'
                                        value='<?= $participants_count ?>' readonly></td>
                         </tr>
                         <tr>
                             <td class='main_td_participants'>Куратор:</td>
-                            <td><input type='text' class='input input_event' name='event_curator'
+                            <td><input type='text' class='input input_event admin_input' name='event_curator'
                                        value='<?= $choosen_event["curator"] ?>' readonly></td>
                         </tr>
                     </table>
