@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3307
--- Время создания: Май 22 2021 г., 22:59
--- Версия сервера: 10.3.22-MariaDB
--- Версия PHP: 7.1.33
+-- Хост: 127.0.0.1:3306
+-- Время создания: Май 23 2021 г., 03:57
+-- Версия сервера: 5.7.29
+-- Версия PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,13 @@ CREATE TABLE `archive` (
   `event` varchar(256) DEFAULT NULL,
   `reg_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `archive`
+--
+
+INSERT INTO `archive` (`id`, `ticket`, `participant_id`, `event`, `reg_time`) VALUES
+(84, 17092001, 3, '«Берегите природу»', '23-05-2021_02:08:38');
 
 -- --------------------------------------------------------
 
@@ -245,7 +252,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `archive`
 --
 ALTER TABLE `archive`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID', AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID', AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT для таблицы `events`

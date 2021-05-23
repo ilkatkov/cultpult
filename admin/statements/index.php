@@ -35,24 +35,12 @@ session_start();
                     <div class="div title_div">
                         <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
                     </div>
-                    <?php if ($state == "1") { // если зашел куратор
-                    ?>
-                        <input class="btn btn_menu1" type="button" id="on_event" value="Ведомость по группе">
-                    <?php } else if ($state != "1") {
-                    ?>
                         <input class="btn btn_menu1" type="button" id="on_register" value="Зарегистрировавшиеся">
                         <input class="btn btn_menu2" type="button" id="on_arrive" value="Пришедшие">
 <!--                    <input class="btn btn_menu" type="button" id="akt_unused" value="Акт выдачи невостр. пит.">-->
                         <input class="btn btn_menu3" type="submit" value="Назад">
-
-                    <?php
-                    } else {
-                        echo "<form><p style='font-size:20px;'>Страница недоступна.</p></form>";
-                    }
-                    ?>
                 </form>
                 <!-- Форма для выхода -->
-
             <?php
             } else {
             ?>

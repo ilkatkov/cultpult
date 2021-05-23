@@ -19,7 +19,7 @@ session_start();
     <div class="page">
         <!-- Шапка -->
         <header>
-            <div class="logo_div"><a href = "/admin"><img src="../../img/logo.svg" class="logo_img"></a><a href = "/admin" class = "admin_link"><p class="logo_word">КультПульт</p></a></div>
+            <div class="logo_div"><a href = "/admin"><img src="../../img/logo_mini.svg" class="logo_img"></a></div>
         </header>
         <!-- Контент -->
         <content>
@@ -38,9 +38,6 @@ session_start();
                         <div>
                             <p style='color:#2ECC71;' class="login_mes">Успех!</p>
                             <p style='font-size:20px;'>Пользователь <?= $_POST['login'] ?> добавлен!</p>
-                            <div class="ring">
-                                <span></span>
-                            </div>
                             <meta http-equiv='refresh' content='2;index.php'>
                         </div>
                     <?php
@@ -49,9 +46,6 @@ session_start();
                         <div>
                             <p style='color:#E74C3C;' class="login_mes">Ошибка!</p>
                             <p style='font-size:20px;'>Имя <?= $_POST['login'] ?> уже существует!</p>
-                            <div class="ring">
-                                <span></span>
-                            </div>
                             <meta http-equiv='refresh' content='2;index.php'>
                         </div>
                     <?php
