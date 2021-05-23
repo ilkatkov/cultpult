@@ -21,7 +21,7 @@ session_start();
     <div class="page">
         <!-- Шапка -->
         <header>
-            <div class="logo_div"><a href = "/admin"><img src="../../img/logo.svg" class="logo_img"></a><a href = "/admin" class = "admin_link"><p class="logo_word">КультПульт</p></a></div>
+            <div class="logo_div"><a href = "/admin"><img src="../../img/logo_mini.svg" class="logo_img"></a></div>
         </header>
         <!-- Контент -->
         <content>
@@ -34,13 +34,12 @@ session_start();
                 <!-- Основная форма -->
                 <form action="add.php" method="POST" id="users_form">
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Администрирование КультПульт</p>
+                        <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
                     </div>
-                    <hr>
                     <table class = 'table_style' id='tab'>
                         <tr class='main_tr_events'>
                             <td>
-                                <b>№ п/п</b>
+                                <b>№</b>
                             </td>
                             <td>
                                 <b>Логин</b>
@@ -62,12 +61,6 @@ session_start();
                             $temp_name = $users[$row]['name'];
                             if ($temp_state == "1") {
                                 $temp_status = "Куратор";
-                            } else if ($temp_state == "2") {
-                                $temp_status = "Расписание";
-                            } else if ($temp_state == "3") {
-                                $temp_status = "Столовая";
-                            } else if ($temp_state == "4") {
-                                $temp_status = "Админ";
                             } else if ($temp_state == "5") {
                                 $temp_status = "Суперадмин";
                             }
@@ -83,14 +76,14 @@ session_start();
                         ?>
                     </table>
 <!--<div class = 'statements_div'>-->
-    <input class="btn btn_menu" type="button" value="Добавить пользователя" id="btn_add_user">
-    <input class="btn btn_menu" type="button" value="Добавить куратора" id="btn_add_curator">
+    <input class="btn btn_menu1" type="button" value="Добавить пользователя" id="btn_add_user">
+    <input class="btn btn_menu2" type="button" value="Добавить куратора" id="btn_add_curator">
 <!--</div>-->
 
                 </form>
                 <!-- Форма для выхода -->
                 <form action="../">
-                    <input class="btn btn_back" type="submit" value="Назад">
+                    <input class="btn mt8px btn_menu3" type="submit" value="Назад">
                 </form>
 
             <?php

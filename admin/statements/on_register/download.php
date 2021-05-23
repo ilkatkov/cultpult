@@ -82,7 +82,7 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
     header("Content-Length: " . filesize('../../../storage/register/' . $file_name));
     header("Content-Disposition: attachment; filename=" . $file_name);
     header("Content-Type: application/x-force-download; name=\"" . '../../../storage/register/' . $file_name . "\"");
-    readfile('../../../storage/event/' . $file_name);
+    readfile('../../../storage/register/' . $file_name);
     ?>
         <form>
             <p class="login_mes">Возврат на главную...</p>

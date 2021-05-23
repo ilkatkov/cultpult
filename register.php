@@ -97,11 +97,8 @@ if (!empty($existParticipant))
         <button class="go_main2" id="cancel_button" name="cancel_button">Отменить заявку</button>
     </div>
     </div>
-
-
 <?php
         }
-
 ?>
 
 </body>

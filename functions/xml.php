@@ -17,7 +17,7 @@ function getParticipantInfo($pin)
 
 function getRegisterParticipants($name)
 {
-    // получаем список записавшихся участников мероприятия Мероприятия
+    // получаем список записавшихся участников мероприятия
     $link = connectDB();
     $query_participants = "SELECT * FROM participants WHERE event='" . $name . "'";
     $participants_sql = mysqli_query($link, $query_participants);
@@ -27,7 +27,7 @@ function getRegisterParticipants($name)
 
 function getArriveParticipants($name)
 {
-    // получаем список записавшихся участников мероприятия Мероприятия
+    // получаем список пришедших участников мероприятия
     $link = connectDB();
     $query_participants = "SELECT * FROM archive WHERE event='" . $name . "'";
     $participants_sql = mysqli_query($link, $query_participants);

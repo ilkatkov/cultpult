@@ -42,9 +42,6 @@ $old_time = $_POST['old_time'];
                         <div>
                             <p style='color:#2ECC71;' class="login_mes">Успех!</p>
                             <p style='font-size:20px;'>Группа изменена!</p>
-                            <div class="ring">
-                                <span></span>
-                            </div>
                             <meta http-equiv='refresh' content='1;index.php'>
                         </div>
                     <?php
@@ -53,9 +50,6 @@ $old_time = $_POST['old_time'];
                         <div>
                             <p style='color:#E74C3C;' class="login_mes">Ошибка!</p>
                             <p style='font-size:20px;'>Каждая группа должна принимать обед в свое время!</p>
-                            <div class="ring">
-                                <span></span>
-                            </div>
                             <meta http-equiv='refresh' content='0;index.php'>
                         </div>
                     <?php

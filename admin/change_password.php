@@ -22,11 +22,6 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
             <form>
                 <p style='color:#2ECC71;' class="login_mes">Успех!</p>
                 <p style='font-size:20px;'>Пароль успешно изменен!</p>
-                <div>
-                    <div class="ring">
-                        <span></span>
-                    </div>
-                </div>
                 <meta http-equiv='refresh' content='2;index.php'>
             </form>
         <?php
@@ -35,36 +30,30 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
             <form>
                 <p style='color:#E74C3C;' class="login_mes">Ошибка!</p>
                 <p style='font-size:20px;'>Старый пароль введен неверно!</p>
-                <div>
-                    <div class="ring">
-                        <span></span>
-                    </div>
-                </div>
                 <meta http-equiv='refresh' content='2;index.php'>
             </form>
         <?php
         } else {
         ?>
             <div class="div title_div">
-                <p style='font-size:20px;'>Смена пароля КультПульт</p>
+                <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
             </div>
-            <hr>
             <!-- Пароль -->
-            <div>
-                <label for="old_password" style="font-size:20px;">Старый пароль</label><br><input type="password" name="old_password" id="old_password" autofocus>
+            <div class = "auth_inputs">
+                <label for="old_password" style="font-size:20px;">Старый пароль</label><br><input class = "admin_input" type="password" name="old_password" id="old_password" autofocus>
             </div>
             <br>
             <!-- Пароль еще раз -->
-            <div>
-                <label for="new_password" style="font-size:20px;">Новый пароль</label><br><input type="password" name="new_password" id="new_password">
+            <div class = "auth_inputs">
+                <label for="new_password" style="font-size:20px;">Новый пароль</label><br><input class = "admin_input" type="password" name="new_password" id="new_password">
             </div>
 
             <!-- Применить -->
-            <input class="btn btn_ok" type="submit" id="accept" value="Применить">
+            <input class="btn mt8px btn_menu1" type="submit" id="accept" value="Применить">
     </form>
     <!-- Форма для выхода -->
     <form action="index.php">
-        <input class="btn btn_back" type="submit" value="Назад">
+        <input class="btn mt8px btn_menu3" type="submit" value="Назад">
     </form>
 <?php
         }

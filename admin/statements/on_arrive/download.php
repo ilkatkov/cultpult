@@ -65,7 +65,8 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
     $participants = getArriveParticipants($event_name);
 //    var_dump($participants);
     for ($row = 0; $row <= count($participants) - 1; $row++) {
-        $temp_participant = $participants[$row]['surname'] . " " . substr($participants[$row]['name'], 0, 2) . "." . substr($participants[$row]['patronymic'], 0, 2) . ".";
+        $temp_info = getParticipantFullName($participants[$row]['participant_id'])[0];
+        $temp_participant = $temp_info['surname'] . " " . substr($temp_info['name'], 0, 2) . "." . substr($temp_info['patronymic'], 0, 2) . ".";
         $temp_code = $participants[$row]['id'];
         $temp_event = (string)getparticipantInfo($temp_code)[0]['events'];
         $table->addRow();
@@ -82,7 +83,7 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
     header("Content-Length: " . filesize('../../../storage/arrive/' . $file_name));
     header("Content-Disposition: attachment; filename=" . $file_name);
     header("Content-Type: application/x-force-download; name=\"" . '../../../storage/arrive/' . $file_name . "\"");
-    readfile('../../../storage/event/' . $file_name);
+    readfile('../../../storage/arrive/' . $file_name);
     ?>
         <form>
             <p class="login_mes">Возврат на главную...</p>

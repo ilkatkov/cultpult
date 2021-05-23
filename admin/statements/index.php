@@ -20,7 +20,7 @@ session_start();
     <div class="page">
         <!-- Шапка -->
         <header>
-            <div class="logo_div"><a href = "/admin"><img src="../../img/logo.svg" class="logo_img"></a><a href = "/admin" class = "admin_link"><p class="logo_word">КультПульт</p></a></div>
+            <div class="logo_div"><a href = "/admin"><img src="../../img/logo_mini.svg" class="logo_img"></a></div>
         </header>
         <!-- Контент -->
         <content>
@@ -30,20 +30,21 @@ session_start();
             if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
             ?>
                 <!-- Основная форма -->
-                <form id="statements_form">
+                <form action="../" id="statements_form">
                     <!-- Заголовок -->
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Ведомости КультПульт</p>
+                        <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
                     </div>
-                    <hr>
                     <?php if ($state == "1") { // если зашел куратор
                     ?>
-                        <input class="btn btn_menu" type="button" id="on_event" value="Ведомость по группе">
+                        <input class="btn btn_menu1" type="button" id="on_event" value="Ведомость по группе">
                     <?php } else if ($state != "1") {
                     ?>
-                        <input class="btn btn_menu" type="button" id="on_register" value="Зарегистрировавшиеся">
-                        <input class="btn btn_menu" type="button" id="on_arrive" value="Пришедшие">
+                        <input class="btn btn_menu1" type="button" id="on_register" value="Зарегистрировавшиеся">
+                        <input class="btn btn_menu2" type="button" id="on_arrive" value="Пришедшие">
 <!--                    <input class="btn btn_menu" type="button" id="akt_unused" value="Акт выдачи невостр. пит.">-->
+                        <input class="btn btn_menu3" type="submit" value="Назад">
+
                     <?php
                     } else {
                         echo "<form><p style='font-size:20px;'>Страница недоступна.</p></form>";
@@ -51,9 +52,7 @@ session_start();
                     ?>
                 </form>
                 <!-- Форма для выхода -->
-                <form action="../">
-                    <input class="btn btn_back" type="submit" value="Назад">
-                </form>
+
             <?php
             } else {
             ?>

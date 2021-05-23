@@ -20,7 +20,7 @@ session_start();
     <div class="page">
         <!-- Шапка -->
         <header>
-            <div class="logo_div"><a href = "/admin"><img src="../../img/logo.svg" class="logo_img"></a><a href = "/admin" class = "admin_link"><p class="logo_word">КультПульт</p></a></div>
+            <div class="logo_div"><a href = "/admin"><img src="../../img/logo_mini.svg" class="logo_img"></a></div>
         </header>
         <!-- Контент -->
         <content>
@@ -33,17 +33,16 @@ session_start();
                 <!-- Основная форма -->
                 <form action="add.php" method="POST">
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Администрирование КультПульт</p>
+                        <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
                     </div>
-                    <hr>
                     <label for="login">ФИО</label>
-                    <input type="text" id="fio" name="fio" required><br>
+                    <input class = "admin_input" type="text" id="fio" name="fio" required><br>
                     <label for="login">Логин</label>
-                    <input type="text" id="login" name="login" required><br>
+                    <input class = "admin_input" type="text" id="login" name="login" required><br>
                     <label for="password">Пароль</label>
-                    <input type="password" id="password" name="password" required><br>
+                    <input class = "admin_input" type="password" id="password" name="password" required><br>
                     <label for="events">Мероприятие</label>
-                    <select class="js-select2" id="events" name="events" required>
+                    <select class = "admin_select" id="events" name="events" required>
                         <?php
                         for ($event = 0; $event < count($events); $event++) {
                             echo "<option value = '" . $events[$event]['name'] . "'>" . $events[$event]['name'] . "</option>";
@@ -51,11 +50,11 @@ session_start();
                         ?>
                     </select>
 
-                    <input class="btn btn_ok" type="submit" value="Отправить">
+                    <input class="btn mt8px btn_menu1" type="submit" value="Отправить">
                 </form>
                 <!-- Форма для выхода -->
                 <form action="./">
-                    <input class="btn btn_back" type="submit" value="Назад">
+                    <input class="btn mt8px btn_menu3" type="submit" value="Назад">
                 </form>
             <?php
             } else {

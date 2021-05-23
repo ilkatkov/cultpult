@@ -37,9 +37,6 @@ session_start();
                     <div>
                         <p style='color:#2ECC71;' class="login_mes">Успех!</p>
                         <p style='font-size:20px;'>Пользователь <?= $_POST['login_update'] ?> обновлен!</p>
-                        <div class="ring">
-                            <span></span>
-                        </div>
                         <meta http-equiv='refresh' content='2;index.php'>
                     </div>
                 <?php

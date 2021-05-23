@@ -28,9 +28,7 @@ $date_for_calendar = (string)date("Y-m-d");
 <div class="page">
     <!-- Шапка -->
     <header>
-        <div class="logo_div"><a href="/admin"><img src="../../../img/logo.svg" class="logo_img"></a><a href="/admin"
-                                                                                                        class="admin_link">
-                <p class="logo_word">КультПульт</p></a></div>
+        <div class="logo_div"><a href="/admin"><img src="../../../img/logo_mini.svg" class="logo_img"></a></div>
     </header>
     <!-- Контент -->
     <content>
@@ -47,54 +45,51 @@ $date_for_calendar = (string)date("Y-m-d");
         <form action="download.php" method="post" id="statements_form">
             <!-- Заголовок -->
             <div class="div title_div">
-                <p style='font-size:20px;'>Ведомости КультПульт</p>
+                <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
             </div>
-            <hr>
             <!-- Выбор даты -->
             <div class="statement_div">
-                <p style='font-size:20px;margin-bottom:10px;'>Выберите мероприятие и нажмите<br>"Получить ведомость"
-                </p>
+                <p style='font-size:30px;margin-bottom:42px;'>Выберите мероприятие<br> и нажмите "Получить ведомость"</p>
+                <div class = "statement_inputs">
                 <?php
                 if ($state == "1") {
                     echo "<input type = 'text' id='select_events' name='select_events' value = '" . geteventOnCurator($_SESSION['Username']) . "' style='text-align:center;' readonly hidden>";
                     echo "<input type = 'text' id='show_event' name='show_event' value = '" . getNameOnCode(geteventOnCurator($_SESSION['Username'])) . "' style='text-align:center;' readonly>";
                 } else {
-                    echo "<select id='select_events' name='select_events'>";
+                    echo "<select class='admin_select' id='select_events' name='select_events'>";
 
                     for ($row = 0; $row < count($events); $row++) {
                         $temp_event = $events[$row]['name'];
                         $temp_id = $events[$row]['id'];
                         echo "<option value = '" . $temp_event . "'> " . $temp_event . " </option>";
                     }
+                    echo "</select>";
 //                    echo "<input type='hidden' value = '" . $events[0]['date'] . "'>";
+                    echo "<input type='text' class='admin_input' value=" . $events[0]['date'] . " name = 'date' id = 'date' autofocus readonly='readonly'>";
                 }
                 ?>
-                </select>
             </div>
-                <div class='statements_div'>
-                    <?php
-                    echo "<input type='date' value=" . $events[0]['date'] . " name = 'date' id = 'date' autofocus readonly='readonly'>";
-                    ?>
+</div>
+<div class='statements_div'>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#look_participants").fancybox({
+                'titlePosition': 'inside',
+                'transitionIn': 'none',
+                'transitionOut': 'none'
+            });
+        });
+    </script>
+    <button id="look_participants" class="btn btn_menu1" href="#statement" title="Получить ведомость"
+            value="Получить ведомость">Получить ведомость
+    </button>
+    <input class="btn btn_menu2" type="submit" value="Скачать ведомость">
 
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $("#look_participants").fancybox({
-                                'titlePosition': 'inside',
-                                'transitionIn': 'none',
-                                'transitionOut': 'none'
-                            });
-                        });
-                    </script>
-                    <button id="look_participants" class="btn btn_ok" href="#statement" title="Список студентов"
-                            value="Ведомость питания">Получить ведомость
-                    </button>
-                    <input class="btn btn_menu" type="submit" value="Скачать ведомость">
-
-        </form>
-        <!-- Форма для выхода -->
-        <form action="../">
-            <input class="btn btn_back" type="submit" value="Назад">
-        </form>
+    </form>
+    <!-- Форма для выхода -->
+    <form action="../">
+        <input class="btn btn_menu3" type="submit" value="Назад">
+    </form>
 </div>
 
 <div style="display: none;">

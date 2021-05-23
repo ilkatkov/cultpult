@@ -87,10 +87,19 @@ function getPin($id)
     return $participant_data;
 }
 
+function getId($pin)
+{
+    $link = connectDB();
+    $query_pin = "SELECT id FROM participants WHERE pin = '" . md5(mysqli_real_escape_string($link, $pin . "welcomebelgorod")) . "'";
+    $sql_pin = mysqli_query(connectDB(), $query_pin);
+    for ($participant_data = []; $row = mysqli_fetch_assoc($sql_pin); $participant_data[] = $row);
+    return $participant_data;
+}
+
 function getEvent($id)
 {
     $link = connectDB();
-    $query_pin = "SELECT events FROM participants WHERE id = '" . mysqli_real_escape_string($link, $id) . "'";
+    $query_pin = "SELECT name FROM events WHERE id = '" . mysqli_real_escape_string($link, $id) . "'";
     $sql_pin = mysqli_query(connectDB(), $query_pin);
     for ($participant_data = []; $row = mysqli_fetch_assoc($sql_pin); $participant_data[] = $row);
     return $participant_data;
@@ -109,7 +118,8 @@ function insertArchive($pin, $event)
 {
     $link = connectDB();
     $reg_time = (string)date("d-m-Y_H:i:s");
-    $query_insert = "INSERT INTO archive (ticket, event, reg_time) VALUES ('" . mysqli_real_escape_string($link, $pin) . "', '" . mysqli_real_escape_string($link, $event) . "', '" . mysqli_real_escape_string($link, $reg_time) . "') ON DUPLICATE KEY UPDATE ticket = '" . mysqli_real_escape_string($link, $pin) . "', event = '" . mysqli_real_escape_string($link, $event) . "', reg_time = '" . mysqli_real_escape_string($link, $reg_time) . "'";
+    $participant_id = getId($pin)[0]['id'];
+    $query_insert = "INSERT INTO archive (ticket, participant_id, event, reg_time) VALUES ('" . mysqli_real_escape_string($link, $pin) . "', '" . mysqli_real_escape_string($link, $participant_id) . "', '" . mysqli_real_escape_string($link, $event) . "', '" . mysqli_real_escape_string($link, $reg_time) . "')";
     mysqli_query(connectDB(), $query_insert);
 }
 

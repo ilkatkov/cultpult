@@ -24,13 +24,13 @@ window.onload = function() {
                     } catch (error) {
                         document.getElementById("event_date").innerHTML = "<p>" + document.getElementById("select_events").options[document.getElementById("select_events").options.selectedIndex].text + " " + document.getElementById("date").value + "</p>";
                     }
-                    participants.innerHTML = "<table class = 'table_module' id = 'participants' border = 1><tr><td align = 'center'>№ п/п</td><td align = 'center'>ФИО студента</td></tr>";
+                    participants.innerHTML = "<table class = 'table_module' id = 'participants' border = 1><tr><td align = 'center'>№ п/п</td><td align = 'center'>ФИО участника</td></tr>";
                     for (row = 0; row < count; row++) {
                         participants.innerHTML += ("<tr><td align = 'center'>" + data[row]["id"] + "</td><td align = 'left'>" + data[row]["name"] + "</td></tr>");
                     }
                     participants.innerHTML += "</table>";
                 } catch (error) {
-                    document.getElementById("event_date").innerHTML = "<p>Ошибка загрузки данных.</p><p>Возможно, никто из студентов этой Мероприятия не записался на обед.</p>";
+                    document.getElementById("event_date").innerHTML = "<p>Ошибка загрузки данных.</p><p>Возможно, никто из участников этого мероприятия еще не пришел.</p>";
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

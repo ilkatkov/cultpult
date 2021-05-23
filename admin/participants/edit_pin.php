@@ -48,13 +48,7 @@ if (!empty($_POST['pin'])) {
                         <form>
                             <p style='color:#2ECC71;' class="login_mes">Успех!</p>
                             <p style='font-size:20px; margin-top:-20px;'>PIN успешно изменен!</p>
-                            <div>
-                                <div class="ring">
-                                    <span></span>
-                                </div>
-                            </div>
                             <?php
-
                             echo "<meta http-equiv='refresh' content='2;participants.php?select_events=" . $event_name . "'>";
                             ?>
                         </form>

@@ -9,6 +9,16 @@ $event_id = (string)$_GET['event_id'];
 $today = $_GET['start'];
 $date = $_GET['end'];
 
+if (empty($today)){
+    $dt1 = new DateTime();
+    $today = $dt1->format("Y-m-d");
+}
+
+if (empty($date)){
+    $dt2 = new DateTime("+1 month");
+    $date = $dt2->format("Y-m-d");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -38,9 +48,7 @@ $date = $_GET['end'];
 <div class="page">
     <!-- Шапка -->
     <header>
-        <div class="logo_div"><a href="/admin"><img src="../../img/logo.svg" class="logo_img"></a><a href="/admin"
-                                                                                                     class="admin_link">
-                <p class="logo_word">КультПульт</p></a></div>
+        <div class="logo_div"><a href = "/admin"><img src="../../img/logo_mini.svg" class="logo_img"></a></div>
     </header>
     <!-- Контент -->
     <content>
@@ -67,30 +75,29 @@ $date = $_GET['end'];
                 <form id="main_form">
                     <!-- Заголовок -->
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Мероприятия КультПульт</p>
+                        <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
                     </div>
-                    <hr>
-                    <?php
-                    if (empty($today)){
-                        $dt1 = new DateTime();
-                        $today = $dt1->format("Y-m-d");
-                    }
 
-                    if (empty($date)){
-                        $dt2 = new DateTime("+1 month");
-                        $date = $dt2->format("Y-m-d");
-                    }
-
-                    ?>
-                    <p>Даты проведения мероприятий</p>
-                    <form action="index.php" method="GET">
+                    <div class = "panel_dates" action="index.php" method="GET">
+                        <p style="font-size:30px; font-family: 'Manrope';">Даты проведения мероприятий</p>
                         <input type="date" name = "start" value="<?= $today ?>">
                         <input type="date" name = "end" value="<?= $date ?>">
-                        <input type = "submit" value = "ok">
-                    </form>
+                        <input class = "go_date" type = "submit" value = "Обновить">
+                    </div>
+
+                    <div class = "events_div">
+                        <div class = "list">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lobortis imperdiet bibendum. In eget libero odio. Mauris posuere, massa sed maximus tincidunt, elit nunc finibus est, sed lobortis ipsum nisi sit amet quam. Morbi porttitor egestas porttitor. Aenean placerat erat arcu, eget consequat sem efficitur in. Etiam est nibh, ultricies eu est ut, feugiat mollis odio. Donec ex urna, vestibulum nec mauris ac, pellentesque luctus nisl.
+                            Pellentesque vitae nisi massa. Donec in consectetur tellus, ac vehicula mi. Integer ac euismod libero. Sed pellentesque ante vitae porta laoreet. Quisque libero augue, cursus id cursus vel, sodales vitae massa. Proin feugiat turpis a augue vulputate, pellentesque consectetur est feugiat. Praesent consequat fermentum diam, lacinia ultrices neque suscipit id. Nam a pulvinar tellus. Morbi lobortis augue in est porta sodales. Maecenas vel faucibus lacus, non rutrum orci. Ut et tempor dolor. Vivamus quis lobortis diam.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lobortis imperdiet bibendum. In eget libero odio. Mauris posuere, massa sed maximus tincidunt, elit nunc finibus est, sed lobortis ipsum nisi sit amet quam. Morbi porttitor egestas porttitor. Aenean placerat erat arcu, eget consequat sem efficitur in. Etiam est nibh, ultricies eu est ut, feugiat mollis odio. Donec ex urna, vestibulum nec mauris ac, pellentesque luctus nisl.
+                            Pellentesque vitae nisi massa. Donec in consectetur tellus, ac vehicula mi. Integer ac euismod libero. Sed pellentesque ante vitae porta laoreet. Quisque libero augue, cursus id cursus vel, sodales vitae massa. Proin feugiat turpis a augue vulputate, pellentesque consectetur est feugiat. Praesent consequat fermentum diam, lacinia ultrices neque suscipit id. Nam a pulvinar tellus. Morbi lobortis augue in est porta sodales. Maecenas vel faucibus lacus, non rutrum orci. Ut et tempor dolor. Vivamus quis lobortis diam.</div>
+                        <div class = "map_and_btn">
+                            <div class = "map" id="mapid"></div>
+                            <input class="btn btn_menu3" type="button" id="btn_back_tab" value="Назад">
+                        </div>
+                    </div>
 
                     <!-- Leaflet beginning -->
-                    <div id="mapid"></div>
+
                     <script>
                         // Map init
                         var mymap = L.map('mapid').setView([50.6, 36.6], 9);
@@ -151,26 +158,21 @@ $date = $_GET['end'];
 //                            }
 //                            ?>
 <!--                    </table>-->
-                    <input class="btn btn_back" type="button" id="btn_back_tab" value="Назад">
+
                 </form>
                 <?php
             } else { // редактируем выбранную группу
-                $choosen_event = geteventInfo($event_id);
-                $choosen_time = $times[array_search($event_id, array_column($times, 'id'))]['time'];
-                $participants_count = count(getparticipants($event_id));
-                $teacher = getTeacher($event_id);
-                $form = getForm($event_id);
-                if (empty($teacher)) {
-                    $teacher = "Выберите преподавателя";
-                }
-                $teachers = getTeachers();
+                $choosen_event = getEvent($event_id)[0];
+
+                $participants_count = count(getRegisterParticipants($choosen_event['name']));
+
+
                 ?>
                 <form action="edit.php" method="post" id="event_form">
                     <!-- Заголовок -->
                     <div class="div title_div">
-                        <p style='font-size:20px;'>Мероприятия КультПульт</p>
+                        <p style="font-size:40px; font-family: 'Akrobat';">Организатор</p>
                     </div>
-                    <hr>
                     <table class='table_participants_style' id='tab'>
                         <tr>
                             <td class='main_td_participants'>ID:</td>
@@ -178,73 +180,23 @@ $date = $_GET['end'];
                                        value='<?= $event_id ?>' readonly></td>
                         </tr>
                         <tr>
-                            <td class='main_td_participants'>Группа:</td>
+                            <td class='main_td_participants'>Мероприятие:</td>
                             <td><input type='text' class='input input_event' name='event_name'
                                        value='<?= $choosen_event["name"] ?>' readonly></td>
                         </tr>
                         <tr>
-                            <td class='main_td_participants'>Студентов:</td>
+                            <td class='main_td_participants'>Участников:</td>
                             <td><input type='text' class='input input_event' name='event_count'
                                        value='<?= $participants_count ?>' readonly></td>
                         </tr>
-                        <tr>
-                            <td class='main_td_participants'>Обучение:</td>
-                            <td>
-                                <select class='input input_event' name="event_form">
-                                    <?php
-                                    if ($form == "1") {
-                                        $old_form = "СПО";
-                                        echo "<option value='1'>СПО</option>";
-                                        echo "<option value='2'>НПО</option>";
-                                    } else if ($form == "2") {
-                                        echo "<option value='2'>НПО</option>";
-                                        echo "<option value='1'>СПО</option>";
-                                    } ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class='main_td_participants'>Время:</td>
-                            <td>
-                                <input type='time' class='input input_event' name='old_time'
-                                       value='<?= $choosen_time ?>' hidden>
-                                <input type='time' class='input input_event' name='event_time'
-                                       value='<?= $choosen_time ?>' autofocus required>
-                            </td>
-                        </tr>
-                        <!--                            <tr>-->
-                        <!--                                <td class = 'main_td_participants'>Преподаватель:</td>-->
-                        <!--                                <td>-->
-                        <!--                                    <select class='input input_event' name="event_teacher">-->
-                        <!--                                        <option disabled selected>-->
-                        <?//= $teacher ?><!--</option>-->
-                        <!--                                        --><?php
-                        //                                        for ($i = 1; $i < count($teachers); $i++) {
-                        //                                            echo "<option value = '" . $teachers[$i] . "'>" . $teachers[$i] . "</option>";
-                        //                                        }
-                        //                                        ?>
-                        <!--                                    </select>-->
-                        <!--                                </td>-->
-                        <!--                            </tr>-->
                         <tr>
                             <td class='main_td_participants'>Куратор:</td>
                             <td><input type='text' class='input input_event' name='event_curator'
                                        value='<?= $choosen_event["curator"] ?>' readonly></td>
                         </tr>
                     </table>
-                    <p style="font-size:14px; line-height: 16px;">Если группа не учится,<br>то необходимо поставить
-                        время питания 00:00.</p>
-
                     <!-- Кнопки -->
-                    <input class="btn btn_ok" type="submit" value="Применить">
-                    <?php if ($state == "5") {
-                        ?>
-                        <input class="btn btn_menu" type="button" name="btn_create_pin" id="btn_create_pin"
-                               value="Сгенерировать PIN-коды">
-                        <?php
-                    }
-                    ?>
-                    <input class="btn btn_back" type="button" id="btn_back_edit" value="Назад">
+                    <input class="btn btn_menu3" type="button" id="btn_back_edit" value="Назад">
                 </form>
                 <?php
             }
