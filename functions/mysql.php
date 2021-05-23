@@ -288,38 +288,6 @@ function getSPOLunchOnday($date_sql)
     return $summa;
 }
 
-function getNPOLunchOnday($date_sql)
-{
-    $link = connectDB();
-    $summa = 0;
-    $events = getevents(); // получаем весь список групп
-    for ($row = 0; $row <= count($events) - 1; $row++) {
-        $temp_code = $events[$row]['id'];
-        $time = getTimeOnCode($temp_code)[0]["time"];
-        $form = getForm($temp_code);
-        if ($time != "00:00" && $form == "2") {
-            $query_count = "SELECT COUNT(id) FROM archive WHERE date = '" . $date_sql . "' AND events = '" . $temp_code . "'";
-            $count_sql = mysqli_query($link, $query_count);
-            for ($count_data = []; $i = mysqli_fetch_assoc($count_sql); $count_data[] = $i);
-            $summa = $summa + (int)$count_data[0]["COUNT(id)"];
-        }
-    }
-    return $summa;
-}
-
-function getAllLunchOnDayAndevent($date_sql, $event_id)
-{
-    $link = connectDB();
-    $time = getTimeOnCode($event_id)[0]["time"];
-    if ($time != "00:00") {
-        $query_count = "SELECT COUNT(id) FROM archive WHERE date = '" . $date_sql . "' AND events = '" . $event_id . "'";
-        $count_sql = mysqli_query($link, $query_count);
-        for ($count_data = []; $i = mysqli_fetch_assoc($count_sql); $count_data[] = $i);
-        return (int)$count_data[0]["COUNT(id)"];
-    } else {
-        return 0;
-    }
-}
 
 function getHistory10($id)
 {
@@ -347,156 +315,12 @@ function checkparticipantYear()
 }
 
 
-function getDateArray()
-{
-    // получаем дату обеда
-    $date_lunch = (string)date("Y-m-d", strtotime("+1 day"));
-    $current_date = (string)date("d.m.Y", strtotime("+1 day"));
-    $current_hour = date("H");
-    $current_day = (string)date("l");
-    // после 9 утра принимаем заявки на послезавтра
-    if ($current_hour >= 9) {
-        $date_lunch = (string)date("Y-m-d", strtotime("+2 day"));
-        $current_date = (string)date("d.m.Y", strtotime("+2 day"));
-    }
-    // в четверг после 9 утра принимаем заявки на понедельник
-    if ($current_day == "Thursday" && $current_hour > 8) {
-        $date_lunch = (string)date("Y-m-d", strtotime("+4 day"));
-        $current_date = (string)date("d.m.Y", strtotime("+4 day"));
-    }
-    // в пятницу до 9 утра принимаем заявки на понедельник
-    if ($current_day == "Friday" && $current_hour < 9) {
-        $date_lunch = (string)date("Y-m-d", strtotime("+3 day"));
-        $current_date = (string)date("d.m.Y", strtotime("+3 day"));
-    }
-    // в пятницу после 9 утра принимаем заявки на вторник
-    if ($current_day == "Friday" && $current_hour > 8) {
-        $date_lunch = (string)date("Y-m-d", strtotime("+4 day"));
-        $current_date = (string)date("d.m.Y", strtotime("+4 day"));
-    }
-    // в субботу принимаем заявки на вторник
-    if ($current_day == "Saturday") {
-        $date_lunch = (string)date("Y-m-d", strtotime("+3 day"));
-        $current_date = (string)date("d.m.Y", strtotime("+3 day"));
-    }
-    // в воскресенье принимаем заявки на вторник
-    if ($current_day == "Sunday") {
-        $date_lunch = (string)date("Y-m-d", strtotime("+2 day"));
-        $current_date = (string)date("d.m.Y", strtotime("+2 day"));
-    }
-    return [$date_lunch, $current_date];
-}
-
-// выдает строку по типу "01.03 - 05.03"
-function getDates5Label()
-{
-    $current_hour = date("H");
-    $current_day = date("w");
-    // воскресенье
-    if ($current_day == 0) {
-        return date('d.m', strtotime('next Monday', strtotime("+1 week"))) . " - " . date('d.m', strtotime('next Friday', strtotime("+1 week")));
-    }
-    // понедельник и вторник
-    else if ($current_day < 3) {
-        return date('d.m', strtotime('next Monday')) . " - " . date('d.m', strtotime('next Friday', strtotime("+1 week")));
-    }
-    // среда до 12
-    else if ($current_day == 3 and $current_hour < 12) {
-        return date('d.m', strtotime('next Monday')) . " - " . date('d.m', strtotime('next Friday', strtotime("+1 week")));
-    }
-    // пятница и суббота
-    else if ($current_day >= 5) {
-        return date('d.m', strtotime('next Monday', strtotime("+1 week"))) . " - " . date('d.m', strtotime('next Friday', strtotime("+1 week")));
-    } else {
-        return date('d.m', strtotime('next Monday', strtotime("+1 week"))) . " - " . date('d.m', strtotime('next Friday', strtotime("+2 week")));
-    }
-}
-
-//возвращает массив из пяти дней (1, 2, 3, 4, 5 (пн, вт, ср, чт, пт))
-function getDates5()
-{
-    $dates = array("short" => array(), "full" => array());
-    $current_hour = date("H");
-    $current_day = date("w");
-    // воскресенье
-    if ($current_day == 0) {
-        $first_date = date('Y-m-d', strtotime('next Monday', strtotime("+1 week")));
-    }
-    // понедельник и вторник
-    else if ($current_day < 3) {
-        $first_date = date('Y-m-d', strtotime('next Monday'));
-    }
-    // среда до 12
-    else if ($current_day == 3 and $current_hour < 12) {
-        $first_date = date('Y-m-d', strtotime('next Monday'));
-    }
-    // пятница и суббота
-    else if ($current_day >= 5) {
-        $first_date = date('Y-m-d', strtotime('next Monday', strtotime("+1 week")));
-    } else {
-        $first_date = date('Y-m-d', strtotime('next Monday', strtotime("+1 week")));
-    }
-
-    $second_date = date('Y-m-d', strtotime($first_date . "+ 1 days"));
-    $third_date = date('Y-m-d', strtotime($second_date . "+ 1 days"));
-    $fourth_date = date('Y-m-d', strtotime($third_date . "+ 1 days"));
-    $fifth_date = date('Y-m-d', strtotime($fourth_date . "+ 1 days"));
-    array_push($dates["short"], (int)substr($first_date, 8, 2));
-    array_push($dates["short"], (int)substr($second_date, 8, 2));
-    array_push($dates["short"], (int)substr($third_date, 8, 2));
-    array_push($dates["short"], (int)substr($fourth_date, 8, 2));
-    array_push($dates["short"], (int)substr($fifth_date, 8, 2));
-    array_push($dates["full"], $first_date);
-    array_push($dates["full"], $second_date);
-    array_push($dates["full"], $third_date);
-    array_push($dates["full"], $fourth_date);
-    array_push($dates["full"], $fifth_date);
-    return $dates;
-}
 
 function getRegTime_app()
 {
     return (string)date("d-m-Y_H:i:s");
 }
 
-function getInfo()
-{
-    return array("text" => "Автоматизированная система сбора заявок на питание КультПульт позволяет каждому студенту, который учится в бесплатной группе, записаться на неделю вперед.\n\nКаждую неделю до среды 12:00 открывается запись на питание следующей недели. Чтобы записаться на обед, необходимо ввести номер своего студенческого билета, выданный Вам PIN-код и выбрать дни питания.\n\nПри возникновении проблем в использовании КультПульт, связывайтесь:", "vk" => "ilkatkov", "email" => "ilkatkov@yandex.ru");
-}
-
-
-function getCaptcha()
-{
-    $captcha_url = 'https://www.xn--80apjjlx0a.xn--p1ai/functions/captcha/';
-    $captcha_data   = file_get_contents($captcha_url);
-
-    if (!empty($captcha_data)) {
-        $contents = json_decode(html_entity_decode($captcha_data), TRUE);
-        return $contents;
-    }
-
-}
-
-function getAdv()
-{
-    $city = 'Москва';
-    $adv_url = 'https://www.xn--80apjjlx0a.xn--p1ai/functions/adv/index.php?city=' . $city;
-    $adv_data   = file_get_contents($adv_url);
-
-    if (!empty($adv_data)) {
-        $contents = json_decode(html_entity_decode($adv_data), TRUE);
-        $data = array();
-        array_push($data, $contents[0]['adv1']);
-        array_push($data, $contents[0]['adv2']);
-        array_push($data, $contents[0]['adv3']);
-        array_push($data, $contents[0]['adv4']);
-        array_push($data, $contents[0]['adv5']);
-        array_push($data, $contents[0]['adv6']);
-        array_push($data, $contents[0]['adv7']);
-
-        return $data;
-    }
-}
 
 function userAuth($username, $password)
 {
@@ -506,11 +330,5 @@ function userAuth($username, $password)
         return true;
     }
 }
-
-function getNextRegisterDate(){
-    $date = date('Y-m-d_12:00', strtotime('next Wednesday'));
-    return $date;
-}
-
 
 
