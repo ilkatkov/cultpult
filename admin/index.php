@@ -9,10 +9,6 @@ $date_for_calendar = (string)date("Y-m-d");
 // выбор страницы
 $page = $_GET['page'];
 
-$dates = getDateArray();
-$date_lunch = $dates[0];
-$current_date = $dates[1];
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
