@@ -2,17 +2,8 @@
 include_once "mobile.php";
 include_once "functions/mysql.php";
 
-$debug = getDebug();
 
-if (!$debug){
-    $work = getStatus();
-    if (!$work){
-        header('Location: break.php');
-    }
-}
-
-$events = getevents(); // получаем весь список групп
-$times = geteventsTime();
+$events = getevents(); // получаем весь список мероприятий
 ?>
 
 <!DOCTYPE html>
@@ -21,29 +12,20 @@ $times = geteventsTime();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="theme-color" content="#ffffff">
-    <title>КультПульт - ПК № 8 им. И.Ф. Павлова</title>
-    <meta name="description" content='Запись на бесплатный горячий обед в ГАПОУ ПК № 8 им. И.Ф. Павлова'>
-    <link rel="stylesheet" href="styles/schedule.css?v2.0">
+    <link rel="icon" href="icon.svg" type=" image/svg+xml">
+    <title>КультПульт</title>
+    <meta name="description" content='Запись на мероприятия КультПульт'>
+    <link rel="stylesheet" href="styles/schedule.css?v3.0">
     <link rel="stylesheet" type="text/css" href="styles/jquery.fancybox.css">
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/jquery.fancybox.js"></script>
+    <script src="js/index.js"></script>
 </head>
 
 <body>
     <div class="header_div">
         <div class="logo_div">
-            <img src="img/logo.svg" class="logo_img">
-            <p class="logo_word">КультПульт</p>
-        </div>
-        <div class="schedule_label">
-            Расписание обедов
+            <img src="img/logo_mini.svg" class="logo_img">
         </div>
     </div>
 
@@ -52,35 +34,31 @@ $times = geteventsTime();
             <thead>
                 <tr>
                     <td class="header_td">
-                        № п/п
+                        №
                     </td>
                     <td class="header_td">
-                        Время
-                    </td>
-                    <td class="header_td">
-                        Группа
+                        Мероприятие
                     </td>
                 </tr>
             </thead>
             <?php
             $number = 0;
             for ($row = 0; $row < count($events); $row++) {
-                if ($times[$row]['time'] != "00:00") {
-                    $temp_event = $events[array_search($times[$row]['id'], array_column($events, 'id'))]['name'];
+
+                    $temp_event = $events[$row]['name'];
                     echo "<tr>";
                     $number++;
                     echo "<td>" . (string)($number) . "</td>";
-                    echo "<td>" . $times[$row]['time'] . "</td>";
-                    echo "<td>" . $temp_event . "</td>";
+                    echo "<td>" . $events[$row]['date'] . "<br>" . $temp_event . "</td>";
                     echo "</tr>";
-                }
+
             }
             ?>
         </table>
     </div>
     <form action=".">
     <div class="input_div ">
-        <button class="back_button " id="back"><img src="img/bxs-chevron-right.svg " class="chevron_sch">Назад</button>
+        <button class="btn btn_menu3 " id="back"><img src="img/bxs-chevron-right.svg " class="chevron_sch">Назад</button>
     </div>
     </form>
 </body>

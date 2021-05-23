@@ -22,7 +22,7 @@ function connectDB()
     // настройки БД
     $host = 'localhost';
     $user = 'root';
-    $password = 'AHBkfyx17';
+    $password = 'root';
     $db_name = 'cultpult';
 
     // подключение к БД и установка кодировки UTF-8
@@ -215,6 +215,13 @@ function deleteUser($login)
 {
     $link = connectDB();
     $query_delete = "DELETE FROM users WHERE login = '" . mysqli_real_escape_string($link, $login) . "'";
+    mysqli_query(connectDB(), $query_delete);
+}
+
+function deleteEvent($id)
+{
+    $link = connectDB();
+    $query_delete = "DELETE FROM events WHERE id = '" . mysqli_real_escape_string($link, $id) . "'";
     mysqli_query(connectDB(), $query_delete);
 }
 

@@ -20,7 +20,6 @@ session_destroy();
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/jquery.fancybox.js"></script>
     <script src="js/index.js"></script>
-    
 </head>
 
 <body>

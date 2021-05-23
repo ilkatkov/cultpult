@@ -86,11 +86,16 @@ if (empty($date)){
                     </div>
 
                     <div class = "events_div">
-                        <div class = "list">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lobortis imperdiet bibendum. In eget libero odio. Mauris posuere, massa sed maximus tincidunt, elit nunc finibus est, sed lobortis ipsum nisi sit amet quam. Morbi porttitor egestas porttitor. Aenean placerat erat arcu, eget consequat sem efficitur in. Etiam est nibh, ultricies eu est ut, feugiat mollis odio. Donec ex urna, vestibulum nec mauris ac, pellentesque luctus nisl.
-                            Pellentesque vitae nisi massa. Donec in consectetur tellus, ac vehicula mi. Integer ac euismod libero. Sed pellentesque ante vitae porta laoreet. Quisque libero augue, cursus id cursus vel, sodales vitae massa. Proin feugiat turpis a augue vulputate, pellentesque consectetur est feugiat. Praesent consequat fermentum diam, lacinia ultrices neque suscipit id. Nam a pulvinar tellus. Morbi lobortis augue in est porta sodales. Maecenas vel faucibus lacus, non rutrum orci. Ut et tempor dolor. Vivamus quis lobortis diam.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lobortis imperdiet bibendum. In eget libero odio. Mauris posuere, massa sed maximus tincidunt, elit nunc finibus est, sed lobortis ipsum nisi sit amet quam. Morbi porttitor egestas porttitor. Aenean placerat erat arcu, eget consequat sem efficitur in. Etiam est nibh, ultricies eu est ut, feugiat mollis odio. Donec ex urna, vestibulum nec mauris ac, pellentesque luctus nisl.
-                            Pellentesque vitae nisi massa. Donec in consectetur tellus, ac vehicula mi. Integer ac euismod libero. Sed pellentesque ante vitae porta laoreet. Quisque libero augue, cursus id cursus vel, sodales vitae massa. Proin feugiat turpis a augue vulputate, pellentesque consectetur est feugiat. Praesent consequat fermentum diam, lacinia ultrices neque suscipit id. Nam a pulvinar tellus. Morbi lobortis augue in est porta sodales. Maecenas vel faucibus lacus, non rutrum orci. Ut et tempor dolor. Vivamus quis lobortis diam.</div>
-                        <div class = "map_and_btn">
+                        <div class = "list">
+                            <?php
+                            for ($event = 0; $event < count($events); $event++)
+                            {
+                               echo "• <a href='index.php?event_id=" . $events[$event]['id'] . "'><b>" . $events[$event]['date'] . "</b> – " .  $events[$event]['name'] . "</a>" . "<br>";
+                            }
+
+                            ?>
+                        </div>
+                            <div class = "map_and_btn">
                             <div class = "map" id="mapid"></div>
                             <input class="btn btn_menu3" type="button" id="btn_back_tab" value="Назад">
                         </div>
@@ -195,6 +200,7 @@ if (empty($date)){
                                        value='<?= $choosen_event["curator"] ?>' readonly></td>
                         </tr>
                     </table>
+                    <input class="btn btn_menu1" type="button" id="btn_delete" value="Удалить">
                     <!-- Кнопки -->
                     <input class="btn btn_menu3" type="button" id="btn_back_edit" value="Назад">
                 </form>

@@ -49,13 +49,15 @@ $date_for_calendar = (string)date("Y-m-d");
             </div>
             <!-- Выбор даты -->
             <div class="statement_div">
-                <p style='font-size:30px;margin-bottom:42px;'>Выберите мероприятие<br> и нажмите "Получить ведомость"</p>
+
                 <div class = "statement_inputs">
                 <?php
                 if ($state == "1") {
+                    echo "<p style='font-size:30px;margin-bottom:42px;'>Выберите действие</p>";
                     echo "<input type = 'text' id='select_events' name='select_events' value = '" . geteventOnCurator($_SESSION['Username']) . "' style='text-align:center;' readonly hidden>";
-                    echo "<input type = 'text' id='show_event' name='show_event' value = '" . getNameOnCode(geteventOnCurator($_SESSION['Username'])) . "' style='text-align:center;' readonly>";
+                    echo "<input type = 'text' id='show_event' class = 'admin_input' name='show_event' value = '" . geteventOnCurator($_SESSION['Username']) . "' style='text-align:center;' readonly>";
                 } else {
+                    echo "<p style='font-size:30px;margin-bottom:42px;'>Выберите мероприятие<br> и действие</p>";
                     echo "<select class='admin_select' id='select_events' name='select_events'>";
 
                     for ($row = 0; $row < count($events); $row++) {

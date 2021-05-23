@@ -137,9 +137,10 @@ button {
     margin: 0 auto;
     /* margin-left: 63px;
     margin-right: 63px; */
-    max-width: 514px;
+    max-width: 900px;
     width: 100%;
     height: auto;
+    margin-bottom: 20px;
     background: #FFFFFF;
     /* main-shadow */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
@@ -148,11 +149,39 @@ button {
 
 .schedule_table {
     /* margin: 0 auto; */
-    margin-top: 49px;
     width: 100%;
 }
 
 .schedule_table tbody tr:nth-child(2n) {
+    background: white;
+}
+
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: 'Manrope';
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    line-height: 36px;
+    width: 500px;
+    max-width: 100%;
+    height: 75px;
+    /*margin-bottom: 16px;*/
+    border-radius: 10px;
+    margin-left: 2px;
+    color: black;
+}
+
+.btn_menu3 {
+    margin-bottom: 20px;
+    border: 3px solid #FFE22C;
+    box-sizing: border-box;
+    border-radius: 10px;
     background: white;
 }
 
@@ -162,8 +191,7 @@ button {
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    /* app-orange */
-    color: #F1813B;
+    color: #7D3AFF;
     background-color: white;
 }
 
